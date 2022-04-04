@@ -187,7 +187,7 @@ Task *upTask (Task *list) {
 Task *readFile(Task *list) {
     FILE *file;
     file = fopen("tasks.txt", "rt");
-    if (file == NULL) return NULL;
+    if (!file) return NULL;
     char name[NAME_MAX_LENGTH];
     int day;
     int month;
