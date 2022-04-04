@@ -134,6 +134,17 @@ void queryTree(Task *root, char *name) {
     }
 }
 
+void freeTree(Task *root) {
+    if (root == NULL)
+        return;
+    else {
+        freeTree(root->left);
+        freeTree(root->rigth);
+    }
+    root = NULL;
+}
+
+
 
 Task *insTask(Task *list) {
     Task *task = malloc(sizeof(Task));
@@ -176,6 +187,7 @@ Task *upTask (Task *list) {
 Task *readFile(Task *list) {
     FILE *file;
     file = fopen("tasks.txt", "rt");
+    if (file == NULL) return NULL;
     char name[NAME_MAX_LENGTH];
     int day;
     int month;
@@ -246,5 +258,6 @@ int main() {
         }
     }
     readAndWriteFile(list);
+    freeTree(list);
     return 0;
 }
